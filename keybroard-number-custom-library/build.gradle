@@ -45,8 +45,8 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 groupId = 'com.github.asadej0951'
-                artifactId = 'calendar_custom_library'
-                version = '1.0.2'
+                artifactId = 'keybroard-number-custom-library'
+                version = '1.0.0'
                 artifact(bundleReleaseAar)
             }
         }

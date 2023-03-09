@@ -1,8 +1,7 @@
 package com.github.asadej0951.keybroardnumbercustom
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import com.github.asadej0951.keybroard_number_custom_library.KeyboardCustom
 

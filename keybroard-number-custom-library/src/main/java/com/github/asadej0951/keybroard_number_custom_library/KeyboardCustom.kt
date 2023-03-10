@@ -1,121 +1,111 @@
 package com.github.asadej0951.keybroard_number_custom_library
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
+import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
-import androidx.appcompat.widget.AppCompatButton
+import android.util.DisplayMetrics
+import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 
-class KeyboardCustom @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
-    private var mContext: Context? = null
-    private var btn1: AppCompatButton? = null
-    private var btn2: AppCompatButton? = null
-    private var btn3: AppCompatButton? = null
-    private var btn4: AppCompatButton? = null
-    private var btn5: AppCompatButton? = null
-    private var btn6: AppCompatButton? = null
-    private var btn7: AppCompatButton? = null
-    private var btn8: AppCompatButton? = null
-    private var btn9: AppCompatButton? = null
-    private var btn0: AppCompatButton? = null
-    private var btnDelete: AppCompatButton? = null
+class KeyboardCustom : ConstraintLayout {
 
-    private val onClickButton = MutableLiveData<String>()
+    private lateinit var manager: KeyboardManager
 
-    private var textOdl = ""
-
-    init {
-        mContext = context
-        init(attrs)
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        readAttrs(attrs)
     }
 
-    private fun init(attrs: AttributeSet?) {
-        View.inflate(context, R.layout.view_keybroard, this)
-
-        btn1 = findViewById(R.id.btn1)
-        btn2 = findViewById(R.id.btn2)
-        btn3 = findViewById(R.id.btn3)
-        btn4 = findViewById(R.id.btn4)
-        btn5 = findViewById(R.id.btn5)
-        btn6 = findViewById(R.id.btn6)
-        btn7 = findViewById(R.id.btn7)
-        btn8 = findViewById(R.id.btn8)
-        btn9 = findViewById(R.id.btn9)
-        btn0 = findViewById(R.id.btn0)
-        btnDelete = findViewById(R.id.btnDelete)
-
-        setEventButton()
-
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
+        readAttrs(attrs)
     }
 
-    private fun setEventButton() {
-        btn1?.let { button ->
-            onClickListener(button)
-        }
-        btn2?.let { button ->
-            onClickListener(button)
-        }
-        btn3?.let { button ->
-            onClickListener(button)
-        }
-        btn4?.let { button ->
-            onClickListener(button)
-        }
-        btn5?.let { button ->
-            onClickListener(button)
-        }
-        btn6?.let { button ->
-            onClickListener(button)
-        }
-        btn7?.let { button ->
-            onClickListener(button)
-        }
-        btn8?.let { button ->
-            onClickListener(button)
-        }
-        btn9?.let { button ->
-            onClickListener(button)
-        }
-        btn0?.let { button ->
-            onClickListener(button)
-        }
-        btnDelete?.let { button ->
-            button.setOnClickListener {
-                onClickButton.value = deleteText()
-            }
+    private fun readAttrs(attrs: AttributeSet) {
+        with(context.theme.obtainStyledAttributes(attrs, R.styleable.KeyboardCustom, 0, 0)) {
+            inflateView(
+                getTypeKeyboard(this),
+                getDimensionPixelSize(
+                    R.styleable.KeyboardCustom_text_size,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                ),
+                getColor(R.styleable.KeyboardCustom_text_color, resources.getColor(androidx.cardview.R.color.cardview_light_background)),
+                getString(R.styleable.KeyboardCustom_text) ?: "0",
+                getDimensionPixelSize(
+                    R.styleable.KeyboardCustom_size_button,
+                   0
+                ),
+                getDrawable(R.styleable.KeyboardCustom_background_button)
+            )
+            recycle()
         }
     }
 
-    private fun onClickListener(button: AppCompatButton) {
-        button.setOnClickListener {
-            onClickButton.value = addText(button.text.toString())
+    private fun getTypeKeyboard(attrs: TypedArray): KeyboardType = KeyboardType.DefKeyboard
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun inflateView(
+        type: KeyboardType,
+        textSize: Int,
+        textColor: Int,
+        text: String,
+        sizeButton: Int,
+        drawable: Drawable?
+    ) {
+        manager = KeyboardEvent()
+        removeAllViews()
+        manager.initView(
+            context,
+            this,
+            textSize,
+            textColor,
+            text,
+            sizeButton,
+            drawable ?: resources.getDrawable(androidx.cardview.R.color.cardview_dark_background)
+        )
+    }
+
+    fun setSizeButton(sizeButton: Float) {
+        manager.setSizeButton(convertDpToPixel(sizeButton, context).toInt())
+    }
+
+    private fun convertDpToPixel(dp: Float, context: Context?): Float {
+        return if (context != null) {
+            val resources = context.resources
+            val metrics = resources.displayMetrics
+            dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+        } else {
+            val metrics = Resources.getSystem().displayMetrics
+            dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
         }
     }
 
     fun setOnClickListener(callback: ((String) -> Unit)) {
-        mContext?.let {
-            onClickButton.observe(it as LifecycleOwner, Observer {
-                callback.invoke(textOdl)
-            })
+        manager.setOnClickListener {
+            callback.invoke(it)
         }
     }
+    fun connectWithEdittext(editText: AppCompatEditText) {
+        editText.setOnTouchListener { v, event ->  true}
+        manager.setOnClickListener {
+            var message = editText.text.toString()
 
-    private fun addText(text: String): String {
-        textOdl += text
-        return textOdl
+            if (it != "delete"){
+                message += it
+            }else{
+                if (message.isNotEmpty()){
+                    message = message.substring(0,message.length-1)
+                }
+            }
+            editText.setText(message)
+        }
     }
-
-    private fun deleteText(): String {
-        textOdl = textOdl.substring(0, textOdl.length - 1)
-        return textOdl
-    }
-
 
 }

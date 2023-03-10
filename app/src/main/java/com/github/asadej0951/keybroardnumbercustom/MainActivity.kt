@@ -16,5 +16,6 @@ class MainActivity : AppCompatActivity() {
         keyboard.setOnClickListener {
             editText.setText(it)
         }
+        keyboard.connectWithEdittext(editText)
     }
 }

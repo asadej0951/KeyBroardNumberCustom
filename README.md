@@ -14,7 +14,7 @@ repositories {
   
   ```
  dependencies {
-	implementation 'com.github.asadej0951:Calendar-Custom-library:1.0.4'
+	        implementation 'com.github.asadej0951:KeyBroardNumberCustom:1.0.2'
 	}
 ```
  #Maven
@@ -27,4 +27,4 @@ repositories {
 </repositories>
 ```
 
-[![](https://jitpack.io/v/asadej0951/Calendar-Custom-library.svg)](https://jitpack.io/#asadej0951/Calendar-Custom-library)
+[![](https://jitpack.io/v/asadej0951/KeyBroardNumberCustom.svg)](https://jitpack.io/#asadej0951/KeyBroardNumberCustom)

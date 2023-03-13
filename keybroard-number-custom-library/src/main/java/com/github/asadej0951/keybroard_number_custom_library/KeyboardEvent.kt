@@ -25,7 +25,8 @@ class KeyboardEvent : KeyboardManager {
         textColor: Int,
         text: String,
         sizeButton: Int,
-        drawable: Drawable
+        drawable: Drawable,
+        marginButton: Int
     ) {
         binding = ViewKeybroardBinding.inflate(LayoutInflater.from(context), viewGroup, true)
         mContext = context
@@ -47,10 +48,11 @@ class KeyboardEvent : KeyboardManager {
         setSizeButton(sizeButton)
         setTextColor(textColor)
         setBackground(drawable)
+        setMarginButton(marginButton)
     }
 
     override fun setTextSize(size: Int) {
-        mFunctionViewKeyboardCustom.setViewTextSize(mArrayList,size)
+        mFunctionViewKeyboardCustom.setViewTextSize(mArrayList, size)
     }
 
     override fun setTextColor(@ColorInt color: Int) {
@@ -68,6 +70,10 @@ class KeyboardEvent : KeyboardManager {
 
     override fun setBackground(drawable: Drawable) {
         mFunctionViewKeyboardCustom.setViewBackground(drawable, mArrayList)
+    }
+
+    override fun setMarginButton(marginButton: Int) {
+        mFunctionViewKeyboardCustom.setViewMarginButton(marginButton, mArrayList)
     }
 
     override fun setOnClickListener(onClick: (String) -> Unit) {

@@ -4,8 +4,9 @@
         <attr name="text_size" format="dimension"/>
         <attr name="text_color" format="reference|color"/>
         <attr name="text" format="string" />
-        a<attr name="size_button" format="dimension"/>
+        <attr name="size_button" format="dimension"/>
         <attr name="background_button" format="reference|color" />
+        <attr name="margin_button" format="dimension"/>
     </declare-styleable>
     
 </resources>

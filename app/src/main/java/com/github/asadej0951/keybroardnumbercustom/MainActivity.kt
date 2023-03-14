@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<AppCompatEditText>(R.id.edit_query)
         val keyboard = findViewById<KeyboardCustom>(R.id.keyboard)
 
-        keyboard.setOnClickListener {
-            editText.setText(it)
-        }
         keyboard.connectWithEdittext(editText)
+        keyboard.setFormatNumberPhone(true)
+
     }
+
+
 }

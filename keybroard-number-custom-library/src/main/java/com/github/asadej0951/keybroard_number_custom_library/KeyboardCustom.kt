@@ -8,6 +8,7 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
@@ -17,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 class KeyboardCustom : ConstraintLayout {
 
     private lateinit var manager: KeyboardManager
+    private var formatNumberPhone = false
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -134,13 +136,19 @@ class KeyboardCustom : ConstraintLayout {
         manager.setMarginButton(marginButton)
     }
 
+    fun setFormatNumberPhone(status: Boolean) {
+        formatNumberPhone = status
+    }
+
     fun connectWithEdittext(editText: AppCompatEditText) {
         editText.setOnTouchListener { v, event -> true }
         manager.setOnClickListener {
             var message = editText.text.toString()
-
             if (it != "delete") {
                 message += it
+                if (formatNumberPhone) {
+                    message = formatNumberPhone(message)
+                }
             } else {
                 if (message.isNotEmpty()) {
                     message = message.substring(0, message.length - 1)
@@ -148,6 +156,16 @@ class KeyboardCustom : ConstraintLayout {
             }
             editText.setText(message)
         }
+
+    }
+
+    private fun formatNumberPhone(text: String): String {
+        val textReplace = text.replace("-", "")
+        var textReturn = text
+        if (textReplace.length == 3 || textReplace.length == 6) {
+            textReturn += "-"
+        }
+        return textReturn
     }
 
 }

@@ -17,6 +17,7 @@ class KeyboardEvent : KeyboardManager {
     private lateinit var mFunctionViewKeyboardCustom: FunctionViewKeyboardCustom
     private val mArrayList = ArrayList<Button>()
     private lateinit var mContext: Context
+    private var imageButton: Drawable? = null
 
     override fun initView(
         context: Context,
@@ -27,10 +28,12 @@ class KeyboardEvent : KeyboardManager {
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable?
+        imageButton: Drawable?,
+        sizeIconButton: Int
     ) {
         binding = ViewKeybroardBinding.inflate(LayoutInflater.from(context), viewGroup, true)
         mContext = context
+        this.imageButton = imageButton
         mArrayList.add(binding.btn0)
         mArrayList.add(binding.btn1)
         mArrayList.add(binding.btn2)
@@ -51,11 +54,12 @@ class KeyboardEvent : KeyboardManager {
         setBackground(drawable)
         setMarginButton(marginButton)
         setImageButton(imageButton)
+        setSizeIconButton(sizeIconButton)
 
         imageButton?.let {
             binding.btnDelete.visibility = View.GONE
             binding.btnDeleteIcon.visibility = View.VISIBLE
-        } ?: kotlin.run {
+        }?:kotlin.run {
             binding.btnDelete.visibility = View.VISIBLE
             binding.btnDeleteIcon.visibility = View.GONE
         }
@@ -83,7 +87,7 @@ class KeyboardEvent : KeyboardManager {
     }
 
     override fun setMarginButton(marginButton: Int) {
-        mFunctionViewKeyboardCustom.setViewMarginButton(marginButton, mArrayList,binding.btnDeleteIcon)
+        mFunctionViewKeyboardCustom.setViewMarginButton(marginButton, mArrayList)
     }
 
     override fun setOnClickListener(onClick: (String) -> Unit) {
@@ -91,6 +95,7 @@ class KeyboardEvent : KeyboardManager {
             button.setOnClickListener {
                 onClick.invoke(if (button != binding.btnDelete) button.text.toString() else "delete")
             }
+
         }
         binding.btnDeleteIcon.setOnClickListener {
             onClick.invoke("delete")
@@ -99,8 +104,18 @@ class KeyboardEvent : KeyboardManager {
 
     override fun setImageButton(imageButton: Drawable?) {
         imageButton?.let {
+            binding.btnDelete.visibility = View.GONE
+            binding.btnDeleteIcon.visibility = View.VISIBLE
+            binding.btnDelete.text = ""
             binding.btnDeleteIcon.setImageDrawable(imageButton)
         }
+    }
+
+    override fun setSizeIconButton(sizeIconButton: Int) {
+        val layoutParams: ViewGroup.LayoutParams = binding.btnDelete.layoutParams
+        layoutParams.width = sizeIconButton
+        layoutParams.height = sizeIconButton
+        binding.btnDelete.layoutParams = layoutParams
     }
 
 }

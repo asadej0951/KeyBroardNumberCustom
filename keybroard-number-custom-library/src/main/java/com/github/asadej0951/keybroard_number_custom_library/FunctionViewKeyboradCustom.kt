@@ -4,13 +4,13 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.widget.AppCompatImageButton
+import android.widget.ImageButton
 
 class FunctionViewKeyboardCustom {
     fun setViewHeightWidth(
         sizeButton: Int,
         mArrayList: ArrayList<Button>,
-        btnDeleteIcon: AppCompatImageButton
+        btnDeleteIcon: ImageButton
     ) {
         if (sizeButton != 0) {
             mArrayList.map { view ->
@@ -28,8 +28,7 @@ class FunctionViewKeyboardCustom {
 
     fun setViewMarginButton(
         marginButton: Int,
-        mArrayList: ArrayList<Button>,
-        btnDeleteIcon: AppCompatImageButton
+        mArrayList: ArrayList<Button>
     ) {
         if (marginButton != 0) {
             mArrayList.map { view ->
@@ -37,9 +36,6 @@ class FunctionViewKeyboardCustom {
                 param.setMargins(marginButton, marginButton, marginButton, marginButton)
                 view.layoutParams = param
             }
-            val param = btnDeleteIcon.layoutParams as ViewGroup.MarginLayoutParams
-            param.setMargins(marginButton, marginButton, marginButton, marginButton)
-            btnDeleteIcon.layoutParams = param
         }
     }
 
@@ -55,7 +51,7 @@ class FunctionViewKeyboardCustom {
     fun setViewBackground(
         drawable: Drawable,
         mArrayList: ArrayList<Button>,
-        btnDeleteIcon: AppCompatImageButton
+        btnDeleteIcon: ImageButton
     ) {
         mArrayList.map {
             it.background = drawable

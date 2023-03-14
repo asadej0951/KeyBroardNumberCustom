@@ -14,7 +14,8 @@ interface KeyboardManager {
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable?
+        imageButton: Drawable?,
+        sizeIconButton: Int
     )
 
     fun setTextSize(size: Int)
@@ -26,4 +27,6 @@ interface KeyboardManager {
     fun setOnClickListener(onClick: ((String) -> Unit))
 
     fun setImageButton(imageButton: Drawable?)
+
+    fun setSizeIconButton(sizeIconButton: Int)
 }

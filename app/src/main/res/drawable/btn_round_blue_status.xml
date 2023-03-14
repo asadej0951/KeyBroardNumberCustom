@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/yellow" android:state_enabled="false" />
-    <item android:drawable="@color/red" android:state_pressed="true" />
-    <item android:drawable="@color/green" />
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="#ECF2FE" />
+            <corners android:radius="13dp" />
+            <stroke android:width="2dp" android:color="#ECF2FE" />
+        </shape>
+    </item>
+
+    <!--released state. -->
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <corners android:radius="13dp" />
+            <solid android:color="#FFFFFFFF" />
+            <stroke android:width="2dp" android:color="#FFFFFFFF" />
+        </shape>
+    </item>
+
+    <!--pressed state. -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <corners android:radius="13dp" />
+            <solid android:color="#ECF2FE" />
+            <stroke android:width="2dp" android:color="#ECF2FE" />
+        </shape>
+    </item>
+
 </selector>

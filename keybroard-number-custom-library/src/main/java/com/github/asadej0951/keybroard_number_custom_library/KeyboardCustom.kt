@@ -51,6 +51,7 @@ class KeyboardCustom : ConstraintLayout {
                 getDrawable(R.styleable.KeyboardCustom_background_button),
                 getDimensionPixelSize(R.styleable.KeyboardCustom_margin_button, spToPx(5f, context)),
                 getDrawable(R.styleable.KeyboardCustom_image_button),
+                getDimensionPixelSize(R.styleable.KeyboardCustom_size_icon_button,spToPx(20f, context))
             )
             recycle()
         }
@@ -67,7 +68,8 @@ class KeyboardCustom : ConstraintLayout {
         sizeButton: Int,
         drawable: Drawable?,
         marginButton: Int,
-        imageButton : Drawable?
+        imageButton: Drawable?,
+        sizeIconButton: Int
     ) {
         manager = KeyboardEvent()
         removeAllViews()
@@ -80,12 +82,16 @@ class KeyboardCustom : ConstraintLayout {
             sizeButton,
             drawable ?: resources.getDrawable(androidx.cardview.R.color.cardview_dark_background),
             marginButton,
-            imageButton
+            imageButton,
+            sizeIconButton
         )
     }
 
     fun setSizeButton(sizeButton: Float) {
         manager.setSizeButton(convertDpToPixel(sizeButton, context).toInt())
+    }
+    fun setSizeIconButton(sizeIconButton: Int){
+        manager.setSizeIconButton(sizeIconButton)
     }
 
     private fun spToPx(sp: Float, context: Context): Int {

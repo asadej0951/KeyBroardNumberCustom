@@ -10,23 +10,18 @@ interface KeyboardManager {
         viewGroup: ViewGroup,
         textSize: Int,
         textColor: Int,
-        text: String,
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable?,
-        sizeIconButton: Int
+        imageButton: Drawable
     )
 
     fun setTextSize(size: Int)
     fun setTextColor(color: Int)
-    fun setText(text: String)
     fun setSizeButton(sizeButton: Int)
     fun setBackground(drawable: Drawable)
     fun setMarginButton(marginButton: Int)
     fun setOnClickListener(onClick: ((String) -> Unit))
 
     fun setImageButton(imageButton: Drawable?)
-
-    fun setSizeIconButton(sizeIconButton: Int)
 }

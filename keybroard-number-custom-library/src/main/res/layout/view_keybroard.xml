@@ -173,20 +173,6 @@
         app:layout_constraintStart_toStartOf="@id/lineColumn1"
         app:layout_constraintTop_toTopOf="@id/lineRow3" />
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:text="delete"
-        android:contentDescription="buttonDelete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/lineColumn2"
-        app:layout_constraintTop_toTopOf="@id/lineRow3"
-        tools:ignore="HardcodedText" />
-
     <ImageButton
         android:id="@+id/btnDeleteIcon"
         android:layout_width="0dp"

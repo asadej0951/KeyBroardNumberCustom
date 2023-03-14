@@ -24,12 +24,10 @@ class KeyboardEvent : KeyboardManager {
         viewGroup: ViewGroup,
         textSize: Int,
         textColor: Int,
-        text: String,
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable?,
-        sizeIconButton: Int
+        imageButton: Drawable
     ) {
         binding = ViewKeybroardBinding.inflate(LayoutInflater.from(context), viewGroup, true)
         mContext = context
@@ -45,24 +43,13 @@ class KeyboardEvent : KeyboardManager {
         mArrayList.add(binding.btn8)
         mArrayList.add(binding.btn9)
         mArrayList.add(binding.btnNull)
-        mArrayList.add(binding.btnDelete)
         mFunctionViewKeyboardCustom = FunctionViewKeyboardCustom()
-        setText(text)
         setTextSize(textSize)
         setSizeButton(sizeButton)
         setTextColor(textColor)
         setBackground(drawable)
         setMarginButton(marginButton)
         setImageButton(imageButton)
-        setSizeIconButton(sizeIconButton)
-
-        imageButton?.let {
-            binding.btnDelete.visibility = View.GONE
-            binding.btnDeleteIcon.visibility = View.VISIBLE
-        }?:kotlin.run {
-            binding.btnDelete.visibility = View.VISIBLE
-            binding.btnDeleteIcon.visibility = View.GONE
-        }
     }
 
     override fun setTextSize(size: Int) {
@@ -74,16 +61,16 @@ class KeyboardEvent : KeyboardManager {
         mFunctionViewKeyboardCustom.setViewColorText(mArrayList, mTextColor)
     }
 
-    override fun setText(text: String) {
-        binding.btnDelete.text = text
-    }
-
     override fun setSizeButton(sizeButton: Int) {
-        mFunctionViewKeyboardCustom.setViewHeightWidth(sizeButton, mArrayList,binding.btnDeleteIcon)
+        mFunctionViewKeyboardCustom.setViewHeightWidth(
+            sizeButton,
+            mArrayList,
+            binding.btnDeleteIcon
+        )
     }
 
     override fun setBackground(drawable: Drawable) {
-        mFunctionViewKeyboardCustom.setViewBackground(drawable, mArrayList,binding.btnDeleteIcon)
+        mFunctionViewKeyboardCustom.setViewBackground(drawable, mArrayList, binding.btnDeleteIcon)
     }
 
     override fun setMarginButton(marginButton: Int) {
@@ -93,7 +80,7 @@ class KeyboardEvent : KeyboardManager {
     override fun setOnClickListener(onClick: (String) -> Unit) {
         mArrayList.map { button ->
             button.setOnClickListener {
-                onClick.invoke(if (button != binding.btnDelete) button.text.toString() else "delete")
+                onClick.invoke(button.text.toString())
             }
 
         }
@@ -104,18 +91,9 @@ class KeyboardEvent : KeyboardManager {
 
     override fun setImageButton(imageButton: Drawable?) {
         imageButton?.let {
-            binding.btnDelete.visibility = View.GONE
             binding.btnDeleteIcon.visibility = View.VISIBLE
-            binding.btnDelete.text = ""
             binding.btnDeleteIcon.setImageDrawable(imageButton)
         }
-    }
-
-    override fun setSizeIconButton(sizeIconButton: Int) {
-        val layoutParams: ViewGroup.LayoutParams = binding.btnDelete.layoutParams
-        layoutParams.width = sizeIconButton
-        layoutParams.height = sizeIconButton
-        binding.btnDelete.layoutParams = layoutParams
     }
 
 }

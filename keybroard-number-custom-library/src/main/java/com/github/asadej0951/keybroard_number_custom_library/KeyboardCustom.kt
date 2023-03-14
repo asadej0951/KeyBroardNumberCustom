@@ -43,15 +43,16 @@ class KeyboardCustom : ConstraintLayout {
                     R.styleable.KeyboardCustom_text_color,
                     resources.getColor(androidx.cardview.R.color.cardview_light_background)
                 ),
-                getString(R.styleable.KeyboardCustom_text_delete) ?: "delete",
                 getDimensionPixelSize(
                     R.styleable.KeyboardCustom_size_button,
                     0
                 ),
                 getDrawable(R.styleable.KeyboardCustom_background_button),
-                getDimensionPixelSize(R.styleable.KeyboardCustom_margin_button, spToPx(5f, context)),
-                getDrawable(R.styleable.KeyboardCustom_image_button),
-                getDimensionPixelSize(R.styleable.KeyboardCustom_size_icon_button,spToPx(20f, context))
+                getDimensionPixelSize(
+                    R.styleable.KeyboardCustom_margin_button,
+                    spToPx(5f, context)
+                ),
+                getDrawable(R.styleable.KeyboardCustom_image_button)
             )
             recycle()
         }
@@ -64,12 +65,10 @@ class KeyboardCustom : ConstraintLayout {
         type: KeyboardType,
         textSize: Int,
         textColor: Int,
-        text: String,
         sizeButton: Int,
         drawable: Drawable?,
         marginButton: Int,
-        imageButton: Drawable?,
-        sizeIconButton: Int
+        imageButton: Drawable?
     ) {
         manager = KeyboardEvent()
         removeAllViews()
@@ -78,20 +77,15 @@ class KeyboardCustom : ConstraintLayout {
             this,
             textSize,
             textColor,
-            text,
             sizeButton,
             drawable ?: resources.getDrawable(androidx.cardview.R.color.cardview_dark_background),
             marginButton,
-            imageButton,
-            sizeIconButton
+            imageButton ?: resources.getDrawable(R.drawable.baseline_delete_forever_24)
         )
     }
 
     fun setSizeButton(sizeButton: Float) {
         manager.setSizeButton(convertDpToPixel(sizeButton, context).toInt())
-    }
-    fun setSizeIconButton(sizeIconButton: Int){
-        manager.setSizeIconButton(sizeIconButton)
     }
 
     private fun spToPx(sp: Float, context: Context): Int {
@@ -127,9 +121,6 @@ class KeyboardCustom : ConstraintLayout {
         manager.setTextColor(color)
     }
 
-    fun setText(text: String) {
-        manager.setText(text)
-    }
 
     fun setSizeButton(sizeButton: Int) {
         manager.setSizeButton(sizeButton)

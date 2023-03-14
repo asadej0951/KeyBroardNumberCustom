@@ -22,6 +22,7 @@
         app:image_button="@drawable/baseline_currency_bitcoin_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:size_button="50dp"
+        app:text_color="@color/cardview_dark_background"
         app:layout_constraintTop_toBottomOf="@+id/edit_query"
         app:margin_button="20dp" />
 

@@ -3,6 +3,7 @@ package com.github.asadej0951.keybroard_number_custom_library
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class KeyboardEvent : KeyboardManager {
     private lateinit var binding: ViewKeybroardBinding
     private lateinit var mFunctionViewKeyboardCustom: FunctionViewKeyboardCustom
     private val mArrayList = ArrayList<Button>()
+    private val mArrayListView = ArrayList<View>()
     private lateinit var mContext: Context
     private var imageButton: Drawable? = null
 
@@ -42,7 +44,11 @@ class KeyboardEvent : KeyboardManager {
         mArrayList.add(binding.btn7)
         mArrayList.add(binding.btn8)
         mArrayList.add(binding.btn9)
-        mArrayList.add(binding.btnNull)
+
+        mArrayListView.add(binding.btnDeleteIcon)
+        mArrayListView.addAll(mArrayList)
+        mArrayListView.add(binding.btnNull)
+
         mFunctionViewKeyboardCustom = FunctionViewKeyboardCustom()
         setTextSize(textSize)
         setSizeButton(sizeButton)
@@ -70,7 +76,7 @@ class KeyboardEvent : KeyboardManager {
     }
 
     override fun setBackground(drawable: Drawable) {
-        mFunctionViewKeyboardCustom.setViewBackground(drawable, mArrayList, binding.btnDeleteIcon)
+        mFunctionViewKeyboardCustom.setViewBackground(drawable, mArrayListView)
     }
 
     override fun setMarginButton(marginButton: Int) {
@@ -80,6 +86,7 @@ class KeyboardEvent : KeyboardManager {
     override fun setOnClickListener(onClick: (String) -> Unit) {
         mArrayList.map { button ->
             button.setOnClickListener {
+                Log.i("checkClickButton","click")
                 onClick.invoke(button.text.toString())
             }
 

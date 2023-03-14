@@ -148,14 +148,14 @@
         app:layout_constraintStart_toStartOf="@id/lineColumn2"
         app:layout_constraintTop_toTopOf="@id/lineRow2" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnNull"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="5dp"
         android:gravity="center"
-        android:text="7"
         android:visibility="invisible"
+        android:src="@drawable/baseline_delete_forever_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/lineColumn1"
         app:layout_constraintStart_toStartOf="parent"

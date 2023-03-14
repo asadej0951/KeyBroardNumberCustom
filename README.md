@@ -14,7 +14,7 @@ repositories {
   
   ```
  dependencies {
-	        implementation 'com.github.asadej0951:KeyBroardNumberCustom:1.0.4'
+	        implementation 'com.github.asadej0951:KeyBroardNumberCustom:1.0.5'
 	}
 ```
  #Maven

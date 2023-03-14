@@ -2,13 +2,11 @@ package com.github.asadej0951.keybroard_number_custom_library
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
@@ -45,13 +43,14 @@ class KeyboardCustom : ConstraintLayout {
                     R.styleable.KeyboardCustom_text_color,
                     resources.getColor(androidx.cardview.R.color.cardview_light_background)
                 ),
-                getString(R.styleable.KeyboardCustom_text) ?: "0",
+                getString(R.styleable.KeyboardCustom_text_delete) ?: "delete",
                 getDimensionPixelSize(
                     R.styleable.KeyboardCustom_size_button,
                     0
                 ),
                 getDrawable(R.styleable.KeyboardCustom_background_button),
-                getDimensionPixelSize(R.styleable.KeyboardCustom_margin_button, spToPx(5f, context))
+                getDimensionPixelSize(R.styleable.KeyboardCustom_margin_button, spToPx(5f, context)),
+                getDrawable(R.styleable.KeyboardCustom_image_button),
             )
             recycle()
         }
@@ -67,7 +66,8 @@ class KeyboardCustom : ConstraintLayout {
         text: String,
         sizeButton: Int,
         drawable: Drawable?,
-        marginButton: Int
+        marginButton: Int,
+        imageButton : Drawable?
     ) {
         manager = KeyboardEvent()
         removeAllViews()
@@ -79,7 +79,8 @@ class KeyboardCustom : ConstraintLayout {
             text,
             sizeButton,
             drawable ?: resources.getDrawable(androidx.cardview.R.color.cardview_dark_background),
-            marginButton
+            marginButton,
+            imageButton
         )
     }
 

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:hint="text"
         android:textSize="15sp"
+        android:inputType="number"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.asadej0951.keybroard_number_custom_library.KeyboardCustom

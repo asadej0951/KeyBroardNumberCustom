@@ -13,7 +13,8 @@ interface KeyboardManager {
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable
+        imageButton: Drawable,
+        font :Int
     )
 
     fun setTextSize(size: Int)

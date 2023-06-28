@@ -29,7 +29,8 @@ class KeyboardEvent : KeyboardManager {
         sizeButton: Int,
         drawable: Drawable,
         marginButton: Int,
-        imageButton: Drawable
+        imageButton: Drawable,
+        font : Int
     ) {
         binding = ViewKeybroardBinding.inflate(LayoutInflater.from(context), viewGroup, true)
         mContext = context
@@ -50,6 +51,15 @@ class KeyboardEvent : KeyboardManager {
         mArrayListView.add(binding.btnNull)
 
         mFunctionViewKeyboardCustom = FunctionViewKeyboardCustom()
+
+
+        if (font != 0){
+            val typeface = context.resources.getFont(font)
+            mArrayList.map {
+                it.typeface = typeface
+            }
+        }
+
         setTextSize(textSize)
         setSizeButton(sizeButton)
         setTextColor(textColor)

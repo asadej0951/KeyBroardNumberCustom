@@ -8,6 +8,7 @@
         <attr name="background_button" format="reference|color" />
         <attr name="margin_button" format="dimension"/>
         <attr name="image_button" format="reference|color" />
+        <attr name="font_family_keyboard" format="reference" />
     </declare-styleable>
     
 </resources>

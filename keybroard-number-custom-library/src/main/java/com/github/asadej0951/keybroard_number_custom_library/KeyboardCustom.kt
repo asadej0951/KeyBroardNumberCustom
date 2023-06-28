@@ -47,12 +47,14 @@ class KeyboardCustom : ConstraintLayout {
                     R.styleable.KeyboardCustom_size_button,
                     0
                 ),
+
                 getDrawable(R.styleable.KeyboardCustom_background_button),
                 getDimensionPixelSize(
                     R.styleable.KeyboardCustom_margin_button,
                     spToPx(5f, context)
                 ),
-                getDrawable(R.styleable.KeyboardCustom_image_button)
+                getDrawable(R.styleable.KeyboardCustom_image_button),
+                getResourceId(R.styleable.KeyboardCustom_font_family_keyboard,0)
             )
             recycle()
         }
@@ -68,7 +70,8 @@ class KeyboardCustom : ConstraintLayout {
         sizeButton: Int,
         drawable: Drawable?,
         marginButton: Int,
-        imageButton: Drawable?
+        imageButton: Drawable?,
+        font: Int
     ) {
         manager = KeyboardEvent()
         removeAllViews()
@@ -80,7 +83,7 @@ class KeyboardCustom : ConstraintLayout {
             sizeButton,
             drawable ?: resources.getDrawable(androidx.cardview.R.color.cardview_dark_background),
             marginButton,
-            imageButton ?: resources.getDrawable(R.drawable.baseline_delete_forever_24)
+            imageButton ?: resources.getDrawable(R.drawable.baseline_delete_forever_24),font
         )
     }
 

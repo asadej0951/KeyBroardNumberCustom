@@ -1,16 +1,14 @@
 package com.github.asadej0951.keybroardnumbercustom
 
-import android.os.Build
+import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import com.github.asadej0951.keybroard_number_custom_library.FormatCustom
+import androidx.core.content.res.ResourcesCompat
 import com.github.asadej0951.keybroard_number_custom_library.KeyboardCustom
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +23,15 @@ class MainActivity : AppCompatActivity() {
         btn.setOnClickListener {
             editText.error = "test test"
         }
+
+
+        val customTypeface: Typeface? = ResourcesCompat.getFont(this, R.font.sukhumvitsetboldttf)
+        customTypeface?.let {
+//            keyboard.setFont(customTypeface)
+        }
+
+        Log.i("customTypeface",customTypeface.toString())
+
 
 //        keyboard.setFormatNumberPhone(true)
 
@@ -45,9 +52,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
-
-
 
 
 

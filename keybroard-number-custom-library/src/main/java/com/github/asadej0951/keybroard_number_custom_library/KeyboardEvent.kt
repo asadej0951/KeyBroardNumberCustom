@@ -2,6 +2,7 @@ package com.github.asadej0951.keybroard_number_custom_library
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,7 +31,7 @@ class KeyboardEvent : KeyboardManager {
         drawable: Drawable,
         marginButton: Int,
         imageButton: Drawable,
-        font : Int
+        font: Int
     ) {
         binding = ViewKeybroardBinding.inflate(LayoutInflater.from(context), viewGroup, true)
         mContext = context
@@ -53,7 +54,7 @@ class KeyboardEvent : KeyboardManager {
         mFunctionViewKeyboardCustom = FunctionViewKeyboardCustom()
 
 
-        if (font != 0){
+        if (font != 0) {
             val typeface = context.resources.getFont(font)
             mArrayList.map {
                 it.typeface = typeface
@@ -96,7 +97,7 @@ class KeyboardEvent : KeyboardManager {
     override fun setOnClickListener(onClick: (String) -> Unit) {
         mArrayList.map { button ->
             button.setOnClickListener {
-                Log.i("checkClickButton","click")
+                Log.i("checkClickButton", "click")
                 onClick.invoke(button.text.toString())
             }
 
@@ -111,6 +112,13 @@ class KeyboardEvent : KeyboardManager {
             binding.btnDeleteIcon.visibility = View.VISIBLE
             binding.btnDeleteIcon.setImageDrawable(imageButton)
         }
+    }
+
+    override fun setFont(customTypeface: Typeface) {
+        mArrayList.map {
+            it.setTypeface(customTypeface, Typeface.BOLD)
+        }
+
     }
 
 }

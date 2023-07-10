@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.DisplayMetrics
@@ -139,6 +140,10 @@ class KeyboardCustom : ConstraintLayout {
 
     fun setFormatNumberPhone(status: Boolean) {
         formatNumberPhone = status
+    }
+    fun setFont(customTypeface: Typeface) {
+        manager.setFont(customTypeface)
+
     }
 
     fun connectWithEdittext(editText: AppCompatEditText) {

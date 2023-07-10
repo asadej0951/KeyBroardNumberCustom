@@ -10,10 +10,10 @@
         android:id="@+id/edit_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="text"
-        android:textSize="15sp"
-        android:inputType="number"
         android:layout_margin="15dp"
+        android:hint="text"
+        android:inputType="number"
+        android:textSize="15sp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.asadej0951.keybroard_number_custom_library.KeyboardCustom
@@ -23,18 +23,17 @@
         app:background_button="@drawable/btn_round_blue_status"
         app:image_button="@drawable/baseline_currency_bitcoin_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:size_button="50dp"
-        app:text_color="@color/cardview_dark_background"
         app:layout_constraintTop_toBottomOf="@+id/edit_query"
         app:margin_button="20dp"
-        app:font_family_keyboard="@font/sukhumvitsetboldttf"
-       />
+        app:size_button="60dp"
+        app:text_size="10sp"
+        app:text_color="@color/cardview_dark_background" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="click"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

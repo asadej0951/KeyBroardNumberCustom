@@ -1,6 +1,7 @@
 package com.github.asadej0951.keybroard_number_custom_library
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 
@@ -25,4 +26,5 @@ interface KeyboardManager {
     fun setOnClickListener(onClick: ((String) -> Unit))
 
     fun setImageButton(imageButton: Drawable?)
+    fun setFont(customTypeface: Typeface)
 }
